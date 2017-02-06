@@ -1,0 +1,50 @@
+**larula
+
+VERSION 14
+
+POSITION . . 400 180
+
+DIALOG main, label("larula - Modelo de series de tiempo") tabtitle ("Principal")
+BEGIN
+
+TEXT        tx_var    90 10 120 .,  label("Seleccione variable")
+VARLIST     vl_var    90 +20 200 ., label("Variables") error("Variable: ")
+TEXT        tx_ar     75 75 75 ., label("Escriba AR")
+EDIT        ed_ar        75 100 50 ., error("Debe escribir un número entre 0 y 100")
+TEXT        tx_ma     250 75 75 ., label("Escriba MA")
+EDIT        ed_ma     250 100 50 ., error("Debe escribir un número entre 0 y 100")
+TEXT        tx_sarima 145 110 100 ., label("Escriba SARIMA")
+EDIT        ed_sarima 165 130 50 ., default("0")
+
+
+END 
+
+OK ok1,      label("OK")
+CANCEL can1, label("Cancelar")
+SUBMIT sub1, label("Aplicar")
+HELP hlp1,   view("Ayuda")
+RESET res1
+COPY copy1
+
+
+PROGRAM command
+
+BEGIN 
+
+put "larula "
+require main.vl_var
+put main.vl_var
+put ", "
+put "ar("
+require main.ed_ar
+put main.ed_ar
+put ") ma("
+require main.ed_ma
+put main.ed_ma
+put ") sarima("
+require main.ed_sarima
+put main.ed_sarima
+put ")"
+
+END 
+
